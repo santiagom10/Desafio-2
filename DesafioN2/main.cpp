@@ -1,5 +1,5 @@
 #include <iostream>
-#include "DesafioN2Libreria.h"
+#include "torneo.h"
 
 using namespace std;
 int main() {

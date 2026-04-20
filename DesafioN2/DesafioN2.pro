@@ -8,4 +8,6 @@ SOURCES += \
         main.cpp
 
 HEADERS += \
-    DesafioN2Libreria.h
+    DesafioN2Libreria.h \
+    jugador.h \
+    torneo.h
