@@ -5,6 +5,7 @@ CONFIG -= qt
 
 SOURCES += \
         DesafioN2Libreria.cpp \
+        jugador.cpp \
         main.cpp
 
 HEADERS += \

@@ -30,8 +30,7 @@ public:
     void setTarjetasAmarillas(int valor);
     void setTarjetasRojas(int valor);
     void setFaltas(int valor);
-    5
-        const char* getNombre() const;
+    const char* getNombre() const;
     const char* getApellido() const;
     int getNumeroCamiseta() const;
     int getPartidosJugados() const;
