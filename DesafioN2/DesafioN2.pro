@@ -5,10 +5,12 @@ CONFIG -= qt
 
 SOURCES += \
         DesafioN2Libreria.cpp \
+        equipo.cpp \
         jugador.cpp \
         main.cpp
 
 HEADERS += \
     DesafioN2Libreria.h \
+    equipo.h \
     jugador.h \
     torneo.h
