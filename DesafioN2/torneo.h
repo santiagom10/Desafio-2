@@ -2,7 +2,9 @@
 #define TORNEO_H
 #include "equipo.h"
 #include "grupo.h"
+
 class Torneo {
+
 private:
     Equipo* equipos;
     int cantidadEquipos;
@@ -10,6 +12,7 @@ private:
     int cantidadGrupos;
     Equipo** bombos[4];
     int cantidadesBombos[4];
+
 public:
     Torneo();
     ~Torneo();
@@ -24,4 +27,5 @@ public:
     int getCantidadEquipos() const;
     Equipo* getEquipo(int i) const;
 };
+
 #endif
