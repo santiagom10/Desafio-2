@@ -2,13 +2,14 @@
 #include "torneo.h"
 
 using namespace std;
+
 int main() {
     Torneo torneo;
     int opcion = 0;
 
     do {
-        cout << "========== UdeAWorldCup ==========" << endl;
-        cout << "1. Cargar equipos " << endl;
+        cout << "\n========== UdeAWorldCup ==========" << endl;
+        cout << "1. Cargar equipos desde CSV" << endl;
         cout << "2. Crear jugadores artificiales" << endl;
         cout << "3. Mostrar equipos cargados" << endl;
         cout << "4. Formar bombos" << endl;
@@ -20,15 +21,24 @@ int main() {
         cout << "10. Clasificar a dieciseisavos" << endl;
         cout << "11. Simular fases finales" << endl;
         cout << "12. Mostrar estadisticas finales" << endl;
+        cout << "13. Guardar historicos de jugadores" << endl;
         cout << "0. Salir" << endl;
         cout << "Seleccione una opcion: ";
-        cin >> opcion;
-        switch(opcion) {
+
+        if (!(cin >> opcion)) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Entrada invalida." << endl;
+            continue;
+        }
+
+        switch (opcion) {
         case 1:
             torneo.cargarEquiposDesdeCSV("selecciones_clasificadas_mundial.csv");
             break;
         case 2:
             torneo.crearJugadoresDeTodosLosEquipos();
+            torneo.cargarHistoricosJugadores("historicos_jugadores.csv"); // 🔥 AQUÍ
             break;
         case 3:
             torneo.mostrarEquipos();
@@ -60,12 +70,16 @@ int main() {
         case 12:
             torneo.mostrarEstadisticasFinales();
             break;
+        case 13:
+            torneo.guardarHistoricosJugadores("historicos_jugadores.csv");
+            break;
         case 0:
             cout << "Saliendo..." << endl;
             break;
         default:
             cout << "Opcion invalida." << endl;
         }
-    } while(opcion != 0);
+    } while (opcion != 0);
+
     return 0;
 }

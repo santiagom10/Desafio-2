@@ -1,8 +1,6 @@
 #ifndef GRUPO_H
 #define GRUPO_H
 
-#endif // GRUPO_H
-
 #include "equipo.h"
 
 class Grupo {
@@ -17,6 +15,7 @@ public:
     Grupo(const Grupo& otro);
     ~Grupo();
     Grupo& operator=(const Grupo& otro);
+
     void setLetra(char letra);
     char getLetra() const;
     int getCantidadEquipos() const;
@@ -27,5 +26,4 @@ public:
     void ordenarTabla();
 };
 
-
-
+#endif

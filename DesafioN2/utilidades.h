@@ -1,7 +1,5 @@
-#ifndef DESAFION2LIBRERIA_H
-#define DESAFION2LIBRERIA_H
-
-#endif // DESAFION2LIBRERIA_H
+#ifndef UTILIDADES_H
+#define UTILIDADES_H
 
 char* copiarCadena(const char* origen);
 int longitudCadena(const char* cad);
@@ -13,3 +11,5 @@ void inicializarAleatorio();
 int aleatorioEnRango(int minimo, int maximo);
 void intercambiarEnteros(int& a, int& b);
 void intercambiarPunteros(void*& a, void*& b);
+
+#endif

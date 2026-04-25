@@ -23,16 +23,15 @@ private:
     int golesFavorGrupo;
     int golesContraGrupo;
 
-
 public:
     Equipo();
-    Equipo(const char* pais, const char* confederacion, const char*
-           directorTecnico, int rankingFIFA,
-           int gf, int gc, int pg, int pe, int pp, int ta, int tr, int faltas);
+    Equipo(const char* pais, const char* confederacion, const char* directorTecnico,
+           int rankingFIFA, int gf, int gc, int pg, int pe, int pp, int ta, int tr, int faltas);
     Equipo(const Equipo& otro);
     ~Equipo();
     Equipo& operator=(const Equipo& otro);
     bool operator<(const Equipo& otro) const;
+
     void setPais(const char* pais);
     void setConfederacion(const char* confederacion);
     void setDirectorTecnico(const char* directorTecnico);
@@ -45,6 +44,7 @@ public:
     void setTarjetasAmarillas(int valor);
     void setTarjetasRojas(int valor);
     void setFaltas(int valor);
+
     const char* getPais() const;
     const char* getConfederacion() const;
     const char* getDirectorTecnico() const;
@@ -63,6 +63,7 @@ public:
     int getGolesFavorGrupo() const;
     int getGolesContraGrupo() const;
     int getDiferenciaGolesGrupo() const;
+
     void crearPlantillaArtificial();
     void repartirGolesHistoricos();
     void imprimirPlantilla() const;
@@ -71,6 +72,5 @@ public:
     void registrarResultadoGrupo(int gf, int gc);
     int* obtenerOnceAleatorio() const;
 };
-
 
 #endif

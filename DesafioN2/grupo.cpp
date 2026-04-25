@@ -1,198 +1,105 @@
 #include "grupo.h"
-#include "DesafioN2Libreria.h"
+#include "utilidades.h"
 #include <iostream>
 
 using namespace std;
 
-//Constructor
 Grupo::Grupo() {
-    letra = 'A';// Inicializa el grupo con la letra A
+    letra = 'A';
     cantidadEquipos = 0;
-    equipos = new Equipo*[4];// Reserva memoria para 4 punteros a Equipo
-
-    // Inicializa sin equipo
-    for(int i = 0; i < 4; i++)
-        equipos[i] = nullptr;
+    equipos = new Equipo*[4];
+    for (int i = 0; i < 4; i++) equipos[i] = 0;
 }
 
-//Constructor con parámetro
 Grupo::Grupo(char letra) {
     this->letra = letra;
     cantidadEquipos = 0;
-    equipos = new Equipo*[4];// Reserva espacio para 4 equipos
-
-    for(int i = 0; i < 4; i++)
-        equipos[i] = nullptr;
+    equipos = new Equipo*[4];
+    for (int i = 0; i < 4; i++) equipos[i] = 0;
 }
 
-//Constructor de copia
 Grupo::Grupo(const Grupo& otro) {
     letra = otro.letra;
-    cantidadEquipos = otro.cantidadEquipos;// Copia cantidad de equipos
+    cantidadEquipos = otro.cantidadEquipos;
     equipos = new Equipo*[4];
-
-    //Copia cada equipo
-    for(int i = 0; i < cantidadEquipos; i++) {
-        equipos[i] = new Equipo(*otro.equipos[i]);
-    }
-
-    for(int i = cantidadEquipos; i < 4; i++) {
-        equipos[i] = nullptr;
-    }
+    for (int i = 0; i < 4; i++) equipos[i] = otro.equipos[i];
 }
 
-//Destructor
 Grupo::~Grupo() {
-    for(int i = 0; i < cantidadEquipos; i++) {
-        delete equipos[i];
-    }
-
     delete[] equipos;
 }
 
-//Sobrecarga del operador
 Grupo& Grupo::operator=(const Grupo& otro) {
-    if(this != &otro) {
-
-        //Libera memoria
-        for(int i = 0; i < cantidadEquipos; i++) {
-            delete equipos[i];
-        }
+    if (this != &otro) {
         delete[] equipos;
-
-        //Copia datos del otro objeto
         letra = otro.letra;
         cantidadEquipos = otro.cantidadEquipos;
         equipos = new Equipo*[4];
-
-        //Copia de los equipos
-        for(int i = 0; i < cantidadEquipos; i++) {
-            equipos[i] = new Equipo(*otro.equipos[i]);
-        }
-
-        for(int i = cantidadEquipos; i < 4; i++) {
-            equipos[i] = nullptr;
-        }
+        for (int i = 0; i < 4; i++) equipos[i] = otro.equipos[i];
     }
-    return *this; // Retorna el objeto actual
+    return *this;
 }
 
-//modificar la letra
-void Grupo::setLetra(char letra) {
-    this->letra = letra;
-}
+void Grupo::setLetra(char letra) { this->letra = letra; }
+char Grupo::getLetra() const { return letra; }
+int Grupo::getCantidadEquipos() const { return cantidadEquipos; }
 
-//consultar valor de la letra
-char Grupo::getLetra() const {
-    return letra;
-}
-
-//cuántos equipos hay en el grupo
-int Grupo::getCantidadEquipos() const {
-    return cantidadEquipos;
-}
-
-// equipo en la posicion
 Equipo* Grupo::getEquipo(int i) const {
-    if(i < 0 || i >= cantidadEquipos)
-        return nullptr;
-
+    if (i < 0 || i >= cantidadEquipos) return 0;
     return equipos[i];
 }
 
-//Verifica si se puede agregar un equipo al grupo
 bool Grupo::puedeAgregarEquipo(Equipo* equipo) const {
+    if (cantidadEquipos >= 4 || equipo == 0) return false;
 
-    //No permite agregar si hay 4 equipos
-    if(cantidadEquipos >= 4 || equipo == nullptr)
-        return false;
-
-    int cantidadUEFA = 0; // Cuenta equipos UEFA
-
-    //Recorre los equipos actuales
-    for(int i = 0; i < cantidadEquipos; i++) {
-
-        //Si son de la misma confederacion
-        if(sonIguales(equipos[i]->getConfederacion(), equipo->getConfederacion())) {
-
-            //Si es UEFA, se permite maximo 2
-            if(sonIguales(equipo->getConfederacion(), "UEFA")) {
+    int cantidadUEFA = 0;
+    for (int i = 0; i < cantidadEquipos; i++) {
+        if (sonIguales(equipos[i]->getConfederacion(), equipo->getConfederacion())) {
+            if (sonIguales(equipo->getConfederacion(), "UEFA")) {
                 cantidadUEFA++;
-            }
-            else {
-                return false; //No repetir otras confederaciones
+            } else {
+                return false;
             }
         }
     }
 
-    //Verifica que no haya mas de 2 UEFA
-    if(sonIguales(equipo->getConfederacion(), "UEFA") && cantidadUEFA >= 2)
-        return false;
-
+    if (sonIguales(equipo->getConfederacion(), "UEFA") && cantidadUEFA >= 2) return false;
     return true;
 }
 
-//Agrega un equipo si cumple
 bool Grupo::agregarEquipo(Equipo* equipo) {
-
-    //Verifica primero si se puede agregar
-    if(!puedeAgregarEquipo(equipo))
-        return false;
-
-    //Lo añade y aumenta el contador
+    if (!puedeAgregarEquipo(equipo)) return false;
     equipos[cantidadEquipos++] = equipo;
     return true;
 }
 
-//Imprime la información del grupo
 void Grupo::imprimir() const {
     cout << "Grupo " << letra << endl;
-
-    // Recorre e imprime cada equipo
-    for(int i = 0; i < cantidadEquipos; i++) {
-        cout << " - " << equipos[i]->getPais()
-        << " (" << equipos[i]->getConfederacion() << ")" << endl;
+    for (int i = 0; i < cantidadEquipos; i++) {
+        cout << " - " << equipos[i]->getPais() << " (" << equipos[i]->getConfederacion() << ")" << endl;
     }
 }
 
-//Ordena la tabla de posiciones del grupo
 void Grupo::ordenarTabla() {
-
-    //Recorre cada posicion
-    for(int i = 0; i < cantidadEquipos - 1; i++) {
-
-        int mejor = i; //Se asume que el mejor equipo esta en la posición actual
-
-        //Busca en el arreglo un equipo mejor
-        for(int j = i + 1; j < cantidadEquipos; j++) {
-
-            //Compara por puntos
-            if(equipos[j]->getPuntosGrupo() > equipos[mejor]->getPuntosGrupo()) {
-                mejor = j; //Se encontro un equipo mejor
-            }
-            //Si empatan en puntos
-            else if(equipos[j]->getPuntosGrupo() == equipos[mejor]->getPuntosGrupo()) {
-
-                //Desempate por diferencia de goles
-                if(equipos[j]->getDiferenciaGolesGrupo() > equipos[mejor]->getDiferenciaGolesGrupo()) {
-                    mejor = j;
-                }
-                //Si siguen empatados
-                else if(equipos[j]->getDiferenciaGolesGrupo() == equipos[mejor]->getDiferenciaGolesGrupo()) {
-
-                    //Desempate por goles
-                    if(equipos[j]->getGolesFavorGrupo() > equipos[mejor]->getGolesFavorGrupo()) {
-                        mejor = j;
+    for (int i = 0; i < cantidadEquipos - 1; i++) {
+        for (int j = 0; j < cantidadEquipos - 1 - i; j++) {
+            bool cambiar = false;
+            if (equipos[j]->getPuntosGrupo() < equipos[j + 1]->getPuntosGrupo()) {
+                cambiar = true;
+            } else if (equipos[j]->getPuntosGrupo() == equipos[j + 1]->getPuntosGrupo()) {
+                if (equipos[j]->getDiferenciaGolesGrupo() < equipos[j + 1]->getDiferenciaGolesGrupo()) {
+                    cambiar = true;
+                } else if (equipos[j]->getDiferenciaGolesGrupo() == equipos[j + 1]->getDiferenciaGolesGrupo()) {
+                    if (equipos[j]->getGolesFavorGrupo() < equipos[j + 1]->getGolesFavorGrupo()) {
+                        cambiar = true;
                     }
                 }
             }
-        }
-
-        //Si se encontro un mejor equipo, se intercambia
-        if(mejor != i) {
-            Equipo* temp = equipos[i];   // Guarda el equipo actual
-            equipos[i] = equipos[mejor]; // Coloca el mejor en su posicion
-            equipos[mejor] = temp;
+            if (cambiar) {
+                Equipo* temp = equipos[j];
+                equipos[j] = equipos[j + 1];
+                equipos[j + 1] = temp;
+            }
         }
     }
 }

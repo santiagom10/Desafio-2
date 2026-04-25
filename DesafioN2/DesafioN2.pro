@@ -4,16 +4,18 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        DesafioN2Libreria.cpp \
         grupo.cpp \
         equipo.cpp \
         jugador.cpp \
         main.cpp \
-        torneo.cpp
+        partido.cpp \
+        torneo.cpp \
+        utilidades.cpp
 
 HEADERS += \
-    DesafioN2Libreria.h \
     equipo.h \
     grupo.h \
     jugador.h \
-    torneo.h
+    partido.h \
+    torneo.h \
+    utilidades.h
