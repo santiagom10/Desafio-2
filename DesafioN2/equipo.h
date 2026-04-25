@@ -1,10 +1,8 @@
 #ifndef EQUIPO_H
 #define EQUIPO_H
-<<<<<<< HEAD
 
-=======
->>>>>>> df98f771bdfd689014c5c580dd31190156b2dfa3
 #include "jugador.h"
+
 class Equipo {
 private:
     char* pais;
@@ -24,20 +22,13 @@ private:
     int puntosGrupo;
     int golesFavorGrupo;
     int golesContraGrupo;
-<<<<<<< HEAD
+
 
 public:
     Equipo();
     Equipo(const char* pais, const char* confederacion, const char*
            directorTecnico, int rankingFIFA,
            int gf, int gc, int pg, int pe, int pp, int ta, int tr, int faltas);
-=======
-public:
-    Equipo();
-    Equipo(const char* pais, const char* confederacion, const char*
-directorTecnico, int rankingFIFA,
-            int gf, int gc, int pg, int pe, int pp, int ta, int tr, int faltas);
->>>>>>> df98f771bdfd689014c5c580dd31190156b2dfa3
     Equipo(const Equipo& otro);
     ~Equipo();
     Equipo& operator=(const Equipo& otro);
@@ -80,8 +71,6 @@ directorTecnico, int rankingFIFA,
     void registrarResultadoGrupo(int gf, int gc);
     int* obtenerOnceAleatorio() const;
 };
-<<<<<<< HEAD
 
-=======
->>>>>>> df98f771bdfd689014c5c580dd31190156b2dfa3
+
 #endif
