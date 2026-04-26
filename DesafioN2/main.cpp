@@ -38,7 +38,7 @@ int main() {
             break;
         case 2:
             torneo.crearJugadoresDeTodosLosEquipos();
-            torneo.cargarHistoricosJugadores("historicos_jugadores.csv"); // 🔥 AQUÍ
+            torneo.cargarHistoricosJugadores("historicos_jugadores.csv");
             break;
         case 3:
             torneo.mostrarEquipos();

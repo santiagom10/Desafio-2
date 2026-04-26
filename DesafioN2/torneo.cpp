@@ -2,7 +2,7 @@
 #include "utilidades.h"
 #include <iostream>
 #include <fstream>
-#include <filesystem> // 👈 arriba del archivo
+#include <filesystem>
 #include <string>
 
 using namespace std;
@@ -777,7 +777,7 @@ void Torneo::guardarHistoricosJugadores(const char* nombreArchivo) const {
     ofstream archivo(nombreArchivo);
 
     cout << "Guardando en: "
-         << std::filesystem::current_path() << endl; // 🔥 ESTA LINEA
+         << std::filesystem::current_path() << endl;
 
     if (!archivo.is_open()) {
         cout << "No se pudo guardar el archivo: " << nombreArchivo << endl;
